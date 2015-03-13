@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'backlog/bulk/version'
+require 'backlog_bulk/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "backlog-bulk"
-  spec.version       = Backlog::Bulk::VERSION
+  spec.name          = "backlog_bulk"
+  spec.version       = BacklogBulk::VERSION
   spec.authors       = ["ISOBE Kazuhiko"]
   spec.email         = ["muramasa64@gmail.com"]
 
