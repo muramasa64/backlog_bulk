@@ -1,0 +1,8 @@
+---
+space: 'your backlog space name'
+api_key: 'your backlog api key'
+summary: 'issue subject'
+startDate: '2015-01-01'
+dueDate: '2015-12-31'
+description: |
+  This is a sample issue description.
