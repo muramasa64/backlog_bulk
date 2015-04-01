@@ -44,6 +44,27 @@ module BacklogBulk
       end
     end
 
+    desc "comment --issuekeys issuekeysfile --content content_name", ""
+    option :issuekeys, aliases: [:i], type: :string, desc: "issuekey each line", required: true
+    option :content, aliases: [:t], type: :string, desc: "content_name in config file", required: true
+    def comment
+      conf = BacklogBulk::Config.new(options)
+      @client = BacklogJp::Client.new(space: conf.space, api_key: conf.api_key)
+      $stderr.puts @client.inspect if conf.debug
+
+      open(conf.issuekeys, 'r').each_line do |issuekey|
+        issuekey.chomp!
+
+        begin
+          result = @client.post "issues/#{issuekey}/comments",
+            content: conf[conf.content]
+          puts "post new comment success: issuekey => #{issuekey}, id => #{result[:id]}"
+        rescue BacklogJp::Client::APIException => e
+          $stderr.puts "post new comment failed: project_key => #{project_key} #{e}"
+        end
+      end
+    end
+
     private
     def init_project(client, project_key)
       [get_project_id(client, project_key), get_last_issue_type_id(client, project_key)]
