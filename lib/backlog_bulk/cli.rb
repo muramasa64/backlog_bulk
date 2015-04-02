@@ -56,9 +56,8 @@ module BacklogBulk
         issuekey.chomp!
 
         begin
-          result = @client.post "issues/#{issuekey}/comments",
-            content: conf[conf.content]
-          puts "post new comment success: issuekey => #{issuekey}, id => #{result[:id]}"
+          @client.post "issues/#{issuekey}/comments", content: conf[conf.content]
+          puts "post new comment\tsuccess\t#{issuekey}\t"
         rescue BacklogJp::Client::APIException => e
           $stderr.puts "post new comment failed: project_key => #{project_key} #{e}"
         end
