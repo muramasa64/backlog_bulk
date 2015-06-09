@@ -9,10 +9,6 @@ Gem::Specification.new do |spec|
   spec.authors       = ["ISOBE Kazuhiko"]
   spec.email         = ["muramasa64@gmail.com"]
 
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com' to prevent pushes to rubygems.org, or delete to allow pushes to any server."
-  end
-
   spec.summary       = %q{Bulk post to backlog.jp}
   spec.description   = %q{backlog_bulk is a script to post the issues and comments the same content on multiple projects of backlog.jp.}
   spec.homepage      = "https://github.com/muramasa64/backlog_bulk"
