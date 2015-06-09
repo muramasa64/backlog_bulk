@@ -82,7 +82,37 @@ module BacklogBulk
       end
     end
 
+    desc "close issue", ""
+    option :issuekeys, aliases: [:i], type: :string, desc: "issuekey each line", required: true
+    def close
+      conf = BacklogBulk::Config.new(options)
+      @client = BacklogJp::Client.new(space: conf.space, api_key: conf.api_key)
+      $stderr.puts @client.inspect if conf.debug
+      ss = get_statuses(@client)
+
+      open(conf.issuekeys, 'r').each_line do |issuekey|
+        issuekey.chomp!
+        begin
+          result = @client.patch "issues/#{issuekey}", statusId: ss['完了']
+          puts "#{issuekey}\t#{result[:status][:name]}"
+        rescue BacklogJp::Client::APIException => e
+          $stderr.puts "show issue failed: issuekey => #{issuekey} #{e}"
+        end
+      end
+    end
+
     private
+    def get_statuses(client)
+      begin
+        r = client.get 'statuses'
+        ss = {}
+        r.each {|s| ss[s[:name]] = s[:id]}
+        return ss
+      rescue BacklogJp::Client::APIException => e
+        $stderr.puts "get statuses failed: #{e}"
+      end
+    end
+
     def init_project(client, project_key)
       [get_project_id(client, project_key), get_last_issue_type_id(client, project_key)]
     end
