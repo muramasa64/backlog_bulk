@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.summary       = %q{Bulk post to backlog.jp}
-  spec.description   = %q{It is a script to post the issues and comments the same content on multiple projects of backlog.jp.}
+  spec.description   = %q{backlog_bulk is a script to post the issues and comments the same content on multiple projects of backlog.jp.}
   spec.homepage      = "https://github.com/muramasa64/backlog_bulk"
   spec.license       = "MIT"
 
