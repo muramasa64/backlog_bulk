@@ -9,7 +9,7 @@ module BacklogBulk
     class_option :config, aliases: [:c], type: :string, desc: "use config file", default: "backlog_bulk.conf"
     class_option :debug, aliases: [:d], type: :boolean, desc: "enable debug mode", default: false
 
-    desc "issue --projects project_key_file", ""
+    desc "issue --projects <project_key_file>", ""
     option :projects, aliases: [:p], type: :string, desc: "project key each line"
     def issue
       conf = BacklogBulk::Config.new(options)
@@ -44,7 +44,7 @@ module BacklogBulk
       end
     end
 
-    desc "comment --issuekeys issuekeysfile --content content_name", ""
+    desc "comment --issuekeys <issuekeysfile> --content <content_name>", ""
     option :issuekeys, aliases: [:i], type: :string, desc: "issuekey each line", required: true
     option :content, aliases: [:t], type: :string, desc: "content_name in config file", required: true
     def comment
@@ -64,7 +64,7 @@ module BacklogBulk
       end
     end
 
-    desc "show issue title", ""
+    desc "showissue --issuekeys <issuekeysfile>", ""
     option :issuekeys, aliases: [:i], type: :string, desc: "issuekey each line", required: true
     def showissue
       conf = BacklogBulk::Config.new(options)
@@ -82,7 +82,7 @@ module BacklogBulk
       end
     end
 
-    desc "close issue", ""
+    desc "close --issuekeys <issuekeysfile>", ""
     option :issuekeys, aliases: [:i], type: :string, desc: "issuekey each line", required: true
     def close
       conf = BacklogBulk::Config.new(options)
