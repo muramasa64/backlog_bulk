@@ -1,28 +1,75 @@
-# BacklogBulk
+# backlog_bulk
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/backlog_bulk`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+backlog_bulk is a script to post the issues and comments the same content on multiple projects of backlog.jp.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'backlog_bulk'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+install it yourself as:
 
     $ gem install backlog_bulk
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+Commands:
+  backlog_bulk close --issuekeys <issuekeysfile>
+  backlog_bulk comment --issuekeys <issuekeysfile> --content <content_name>
+  backlog_bulk help [COMMAND]
+  backlog_bulk issue --projects <project_key_file>
+  backlog_bulk showissue --issuekeys <issuekeysfile>
+
+Options:
+  c, [--config=CONFIG]        # use config file
+                              # Default: backlog_bulk.conf
+  d, [--debug], [--no-debug]  # enable debug mode
+```
+
+### create issues
+
+Create a file that contains project key per line.
+for example:
+
+```
+$ cat projects
+ABC
+DEF
+GHI
+```
+
+Create a config file (YAML format) named `backlog_bulk.conf`.
+for example:
+
+```
+---
+space: 'your backlog space name'
+api_key: 'your backlog api key'
+summary: 'issue subject'
+startDate: '2015-01-01'
+dueDate: '2015-12-31'
+description: |
+  Hi, all
+
+  This is a multipost issue.
+```
+
+Execute `backlog_bulk issue --projects projects`
+
+### comment
+
+Create a `issuekeys` file that contains issue key per line.
+for example:
+
+```
+ABC-3
+DEF-123
+GHI-408
+```
+
+`$ backlog_bulk comment --issuekeys issuekeys --content 'this is a comment'`
+
+###
 
 ## Development
 
