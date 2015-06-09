@@ -67,9 +67,29 @@ DEF-123
 GHI-408
 ```
 
-`$ backlog_bulk comment --issuekeys issuekeys --content 'this is a comment'`
+Add config to comment content.
+for example:
 
-###
+```
+---
+space: 'your backlog space name'
+api_key: 'your backlog api key'
+summary: 'issue subject'
+startDate: '2015-01-01'
+dueDate: '2015-12-31'
+description: |
+  Hi, all
+
+  This is a multipost issue.
+comment1: |
+  This is a comment example.
+comment2: |
+  This is a comment example, too.
+```
+
+
+
+`$ backlog_bulk comment --issuekeys issuekeys --content comment1`
 
 ## Development
 
